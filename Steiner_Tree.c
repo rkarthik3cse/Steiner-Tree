@@ -316,13 +316,18 @@ int main()
 	count++;
     }    
     
-    for(int l=0;l<V;l++)
+    for(i=0;i<y;i++)
     {
-	for(int m=0;m<V;m++)
+	    printf("Vertex %d is present in T\n",T[i]);
+    }
+	
+    for(i=0;i<V;i++)
+    {
+	for(j=0;j<V;j++)
 	{
-		if(is_included[l][m] == 1)
+		if(is_included[i][j] == 1)
 		{
-			printf("Edge %d <-> %d is in T\n",l,m);
+			printf("Edge %d <-> %d is in T\n",i,j);
 		}
 	}
     }
