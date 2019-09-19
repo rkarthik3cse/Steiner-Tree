@@ -16,9 +16,8 @@
 int dist[V];
 int parent[V];
 int a[V] = {0};
-int T[V] = {0}; /* List of Vertices in MST T */
-int U[V] = {0};
-int y = 0;      /* Number of Vertices in MST T */
+int T[V] = {0};      /* List of Vertices in MST T */
+int y = 0;           /* Number of Vertices in MST T */
 int d = 0;
 
 /*
