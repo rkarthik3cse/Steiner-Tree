@@ -171,161 +171,161 @@ int main()
     count = 1;
     while(count<K)
     {
-		/*
-		 * Step 2 a) of the algorithm 
-		 * "Select a terminal x not in T that is closest 
+	/*
+	 * Step 2 a) of the algorithm 
+	 * "Select a terminal x not in T that is closest 
          * to a vertex in T"
-		 */		 		 
-		x = 0;				/* x --> Next Terminal Vertex */
-		int min = INT_MAX;
+	 */		 		 
+	x = 0;				/* x --> Next Terminal Vertex */
+	int min = INT_MAX;
 	
-		for(i=1;i<K;i++)
-		{
-			if((min>dist[terminal_vertices[i]]) && 
-			   (dist[terminal_vertices[i]] != 0) && 
-			   ((is_processed[terminal_vertices[i]]) == 0))
-			{
-				min = dist[terminal_vertices[i]];
-				x = terminal_vertices[i];		
-			}
-		} 		
-		printf("Next Terminal Vertex to be added to T is : \"%d\" \n",x);
-		/*printf("T ---> ");
- 	    for(i=0;i<y;i++)
-		{
-			printf("%d  ",T[i]);
-		}*/
-
-	    /*
-	     * Step 2 b) of the algorithm starts here 
-		 * "Finding Vertex in T which is closest to 
-		 * Next Terminal Vertex to be added" 
-		 */
-		//printf("\nStarted Processing T\n");
-		int min_cost = INT_MAX;
-	    for(i=0;i<y;i++)
-		{
-			cost = 0;
-			//printf("%d\n",T[i]);
-			dijkstra(graph,T[i]);					
-			//printSolution(dist, V, T[i]); 
-			d = 0;
-			find_parent(parent, x);
-			/*printf("a ---> ");
-	    	for(j=0;j<d;j++)
-			{
-			 	printf("%d  ",a[j]);        			 	
-			}		
-			printf("\n");*/
-
-   	    	for(j=0;j<d;j++)
-			{
-				if(j == 0)
-				{
-					if(is_added[T[i]][a[0]] == 0)
-					{
-						is_added[T[i]][a[0]] = 1;
-						//printf("Edge %d -> %d is considered\n",T[i],a[0]);
-						cost += graph[T[i]][a[0]];
-					}				
-				}
-				else
-				{
-					if(is_added[a[j-1]][a[j]] == 0)
-					{
-						is_added[a[j-1]][a[j]] = 1;
-						//printf("Edge %d -> %d is considered\n",a[j-1],a[j]);
-						cost += graph[a[j-1]][a[j]];
-					}
-				}				
-			}	    	   
-			if(cost < min_cost)
-			{
-				min_cost = cost;
-				source_vertex = T[i];
-			}
-			/*printf("Source Vertex : %d\n",T[i]);
-			printf("Cost : %d\n",cost);*/
-			for(int l=0;l<V;l++)
-			{
-				for(int m=0;m<V;m++)
-				{
-					is_added[l][m] = is_included[l][m];
-				}
-			}				
+	for(i=1;i<K;i++)
+	{
+		if((min>dist[terminal_vertices[i]]) && 
+		   (dist[terminal_vertices[i]] != 0) && 
+		   ((is_processed[terminal_vertices[i]]) == 0))
+	  	{
+	 		min = dist[terminal_vertices[i]];
+			x = terminal_vertices[i];		
 		}
-		/*printf("Ended Processing T\n");
-		printf("Closest Source Vertex : %d\n",source_vertex);
-		printf("Minimum Cost : %d\n",cost);*/
-				
-	 	/*
-	 	 * x is connected with "source_vertex" in T
-	 	 * "Adding to T the shortest path that connects x with T"
-	 	 * Total Cost is calculated here
-	 	 */		
-		dijkstra(graph,source_vertex);					
-		//printSolution(dist, V, source_vertex); 
-		
+	} 		
+	printf("Next Terminal Vertex to be added to T is : \"%d\" \n",x);
+	/*printf("T ---> ");
+ 	for(i=0;i<y;i++)
+	{
+		printf("%d  ",T[i]);
+	}*/
+
+	/*
+	 * Step 2 b) of the algorithm starts here 
+	 * "Finding Vertex in T which is closest to 
+	 * Next Terminal Vertex to be added" 
+	 */
+	//printf("\nStarted Processing T\n");
+	int min_cost = INT_MAX;
+	for(i=0;i<y;i++)
+	{
+		cost = 0;
+		//printf("%d\n",T[i]);
+		dijkstra(graph,T[i]);					
+		//printSolution(dist, V, T[i]); 
 		d = 0;
 		find_parent(parent, x);
 		/*printf("a ---> ");
-	    for(j=0;j<d;j++)
+	    	for(j=0;j<d;j++)
 		{
 		 	printf("%d  ",a[j]);        			 	
 		}		
 		printf("\n");*/
-   	    for(j=0;j<d;j++)
+
+   	    	for(j=0;j<d;j++)
 		{
-			if(j==0)
+			if(j == 0)
 			{
-				if(is_included[source_vertex][a[0]] == 0)
+				if(is_added[T[i]][a[0]] == 0)
 				{
-					is_included[source_vertex][a[0]] = 1;
-					total_cost += graph[source_vertex][a[0]];
-					//printf("Edge %d\t%d is added\n",source_vertex,a[0]);						
-					if(is_processed[a[0]] == 0)
-					{
- 						is_processed[a[0]] = 1;
-						T[y] = a[0];
-						y++;
-					}
+					is_added[T[i]][a[0]] = 1;
+					//printf("Edge %d -> %d is considered\n",T[i],a[0]);
+					cost += graph[T[i]][a[0]];
 				}				
 			}
 			else
 			{
-				if(is_included[a[j-1]][a[j]] == 0)
+				if(is_added[a[j-1]][a[j]] == 0)
 				{
-					is_included[a[j-1]][a[j]] = 1;
-					total_cost += graph[a[j-1]][a[j]];
-					//printf("Edge %d\t%d is added\n",a[j-1],a[j]);
-					if(is_processed[a[j-1]] == 0)
-					{						
-						is_processed[a[j-1]] = 1;
-						T[y] = a[j-1];
-						y++;
-					}
-					if(is_processed[a[j]] == 0)
-					{
-						is_processed[a[j]] = 1;
-						T[y] = a[j];
-						y++;
-					}
+					is_added[a[j-1]][a[j]] = 1;
+					//printf("Edge %d -> %d is considered\n",a[j-1],a[j]);
+					cost += graph[a[j-1]][a[j]];
 				}
 			}				
-		}				   
-		count++;
+		}	    	   
+		if(cost < min_cost)
+		{
+			min_cost = cost;
+			source_vertex = T[i];
+		}
+		/*printf("Source Vertex : %d\n",T[i]);
+		printf("Cost : %d\n",cost);*/
+		for(int l=0;l<V;l++)
+		{
+			for(int m=0;m<V;m++)
+			{
+				is_added[l][m] = is_included[l][m];
+			}
+		}				
+	}
+	/*printf("Ended Processing T\n");
+	printf("Closest Source Vertex : %d\n",source_vertex);
+	printf("Minimum Cost : %d\n",cost);*/
+			
+	/*
+	 * x is connected with "source_vertex" in T
+	 * "Adding to T the shortest path that connects x with T"
+	 * Total Cost is calculated here
+	 */		
+	dijkstra(graph,source_vertex);					
+	//printSolution(dist, V, source_vertex); 
+		
+	d = 0;
+	find_parent(parent, x);
+	/*printf("a ---> ");
+	for(j=0;j<d;j++)
+	{
+	 	printf("%d  ",a[j]);        			 	
+	}		
+	printf("\n");*/
+   	for(j=0;j<d;j++)
+	{
+		if(j==0)
+		{
+			if(is_included[source_vertex][a[0]] == 0)
+			{
+				is_included[source_vertex][a[0]] = 1;
+				total_cost += graph[source_vertex][a[0]];
+				//printf("Edge %d\t%d is added\n",source_vertex,a[0]);						
+				if(is_processed[a[0]] == 0)
+				{
+ 					is_processed[a[0]] = 1;
+					T[y] = a[0];
+					y++;
+				}
+			}				
+		}
+		else
+		{
+			if(is_included[a[j-1]][a[j]] == 0)
+			{
+				is_included[a[j-1]][a[j]] = 1;
+				total_cost += graph[a[j-1]][a[j]];
+				//printf("Edge %d\t%d is added\n",a[j-1],a[j]);
+				if(is_processed[a[j-1]] == 0)
+				{						
+					is_processed[a[j-1]] = 1;
+					T[y] = a[j-1];
+					y++;
+				}
+				if(is_processed[a[j]] == 0)
+				{
+					is_processed[a[j]] = 1;
+					T[y] = a[j];
+					y++;
+				}
+			}
+		}				
+	}				   
+	count++;
     }    
     
     for(int l=0;l<V;l++)
+    {
+	for(int m=0;m<V;m++)
 	{
-		for(int m=0;m<V;m++)
+		if(is_included[l][m] == 1)
 		{
-			if(is_included[l][m] == 1)
-			{
-				printf("Edge %d <-> %d is in T\n",l,m);
-			}
+			printf("Edge %d <-> %d is in T\n",l,m);
 		}
 	}
+    }
     printf("Total Cost : %d\n",total_cost);
     return 0; 
 }
