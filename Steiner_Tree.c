@@ -10,15 +10,15 @@
 #include <limits.h> 
 #include <stdbool.h>
 
-#define V 7		/* Number of Vertices in Graph */
-#define K 3 	/* Number of Terminal Vertices in MST T */
+#define V 7     /* Number of Vertices in Graph */
+#define K 3     /* Number of Terminal Vertices in MST T */
 
 int dist[V];
 int parent[V];
 int a[V] = {0};
-int T[V] = {0};	/* List of Vertices in MST T */
+int T[V] = {0}; /* List of Vertices in MST T */
 int U[V] = {0};
-int y = 0;		/* Number of Vertices in MST T */
+int y = 0;      /* Number of Vertices in MST T */
 int d = 0;
 
 /*
@@ -128,7 +128,7 @@ void dijkstra(int graph[V][V], int src)
     //printSolution(dist, V); 
 } 
 
-// driver program to test above function 
+
 int main() 
 { 
     int i = 0, j = 0;
@@ -142,14 +142,14 @@ int main()
     int total_cost = 0, count = 0, cost = 0, x = 0;
 
     int graph[V][V] = {
-						{0,0,0,0,0,0,0},
-						{0,0,7,0,0,0,6},
-						{0,7,0,1,0,0,5},
-						{0,0,1,0,1,3,0},
-						{0,0,0,1,0,1,4},
-						{0,0,0,3,1,0,10},
-						{0,6,5,0,4,10,0}						 
-    				  };     
+		                {0,0,0,0,0,0,0},
+		                {0,0,7,0,0,0,6},
+		                {0,7,0,1,0,0,5},
+		                {0,0,1,0,1,3,0},
+		                {0,0,0,1,0,1,4},
+		                {0,0,0,3,1,0,10},
+		                {0,6,5,0,4,10,0}						 
+    		       };     
     
     /*
      * Step 1 of the algorithm
@@ -161,8 +161,8 @@ int main()
     dijkstra(graph,terminal_vertices[0]);
     //printSolution(dist, V, terminal_vertices[0]); 
     is_processed[terminal_vertices[0]] = 1;
-	T[0] = terminal_vertices[0];
-	y++;
+    T[0] = terminal_vertices[0];
+    y++;
 	    
     /*
      * Step 2 of the algorithm starts here
@@ -190,8 +190,7 @@ int main()
 			}
 		} 		
 		printf("Next Terminal Vertex to be added to T is : \"%d\" \n",x);
-		
- 	    /*printf("T ---> ");
+		/*printf("T ---> ");
  	    for(i=0;i<y;i++)
 		{
 			printf("%d  ",T[i]);
@@ -210,7 +209,6 @@ int main()
 			//printf("%d\n",T[i]);
 			dijkstra(graph,T[i]);					
 			//printSolution(dist, V, T[i]); 
-		
 			d = 0;
 			find_parent(parent, x);
 			/*printf("a ---> ");
