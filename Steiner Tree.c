@@ -15,10 +15,16 @@
 
 int dist[V];
 int parent[V];
-int a[V] = {0};
-int T[V] = {0};      /* List of Vertices in MST T */
+
+int T[V] = {0};      /* Set of Vertices in MST T */
 int y = 0;           /* Number of Vertices in MST T */
-int d = 0;
+
+int a[V] = {0};      /* Stores Set of Vertices in the desired Path
+                        from source to destination vertex excluding the latter*/
+
+int d = 0;           /* Number of Vertices in the desired Path 
+                        from source to destination vertex excluding the latter*/
+
 
 /*
  * A utility function to find the vertex with minimum distance value, from 
