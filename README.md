@@ -1,5 +1,5 @@
-# Steiner-Tree
-Steiner Tree Data Structure using C Programming
+# Steiner Tree
+Steiner Tree in Graph Data Structure using C Programming
 
 
 Explanation:
