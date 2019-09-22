@@ -4,6 +4,8 @@
  * The MST can include remaining vertices also.
  * Dijkstra's Shortest Path Algorithm is used here.
  * Initially T is empty.
+ * 
+ * PS : Debug Statements are commented out. They can be uncommented for better understanding.
  */
 
 #include <stdio.h> 
@@ -11,7 +13,7 @@
 #include <stdbool.h>
 
 #define V 7     /* Number of Vertices in Graph */
-#define K 3     /* Number of Terminal Vertices in MST T */
+#define K 4     /* Number of Terminal Vertices in MST T */
 
 int dist[V];
 int parent[V];
@@ -129,8 +131,6 @@ void dijkstra(int graph[V][V], int src)
 				dist[v] = dist[u] + graph[u][v]; 
 		    }
     } 
-    // print the constructed distance array 
-    //printSolution(dist, V); 
 } 
 
 
@@ -138,7 +138,7 @@ int main()
 { 
     int i = 0, j = 0;
     
-    int terminal_vertices[K] = {1,6,3};	
+    int terminal_vertices[K] = {1,3,5,6};	
     int remaining_vertices[K] = {0};
     int source_vertex = 0;
     int is_processed[V] = {0};
